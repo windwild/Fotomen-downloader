@@ -173,5 +173,4 @@ def main():
         line_number += 1
 
 if __name__ == '__main__':
-    #main()
-    print get_page_number("http://fotomen.cn/2012/02/tian-ma-xi/")
+    main()
