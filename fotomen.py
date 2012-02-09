@@ -123,7 +123,7 @@ def download_img(url,page_number):
         if (len(arr) == 0):
             if (os.path.exists("error_pages") == False):
                 os.makedirs("error_pages")
-            error_fp = open("error_pages/%d_%d_%d.html",'w')
+            error_fp = open("error_pages/%d_%d_%s_%d.html" % (year,month,name,i),'w')
             error_fp.write(content)
             error_fp.close()
             continue
