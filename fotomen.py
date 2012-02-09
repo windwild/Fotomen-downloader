@@ -24,7 +24,7 @@ def write_error(error_info):
 def get_page_number(url):
     page_number = 0
     content = urllib2.urlopen(url)
-    get_page_info(url,content.read())
+    get_page_info(url)
     soup = BeautifulSoup.BeautifulSoup(content)
     s1 = soup.find('div',{"class" : "subpage"})
     re_text = '<span>(\d{1,2})<\/span>'
@@ -36,7 +36,8 @@ def get_page_number(url):
         page_number = string.atoi(result[-1])
     return page_number
 
-def get_page_info(url,content):
+def get_page_info(url):
+    content = get_page(url)
     re_title = '<title>(.*?)</title>'
     re_tags = 'rel="tag">(.*?)</a>'
     tags = re.findall(re_tags, content)
@@ -123,7 +124,7 @@ def download_img(url,page_number):
         if (len(arr) == 0):
             if (os.path.exists("error_pages") == False):
                 os.makedirs("error_pages")
-            error_fp = open("error_pages/%d_%d_%s_%d.html" % (year,month,name,i),'w')
+            error_fp = open("error_pages/%s_%s_%s_%d.html" % (year,month,name,i),'w')
             error_fp.write(content)
             error_fp.close()
             continue
@@ -172,4 +173,5 @@ def main():
         line_number += 1
 
 if __name__ == '__main__':
-    main()
+    #main()
+    print get_page_number("http://fotomen.cn/2012/02/tian-ma-xi/")
